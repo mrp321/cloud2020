@@ -10,6 +10,7 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -75,7 +76,11 @@ public class PaymentController {
     }
 
     @GetMapping(value = "/lb")
-    public String getPaymentLB() {
+    public String getPaymentLB(HttpServletRequest request) {
+        String header = request.getHeader("MyHeader");
+        System.out.println("来自gateway9527的header: " + header);
+        String parameter = request.getParameter("MyParameter");
+        System.out.println("来自gateway9527parameter: " + parameter);
         return serverPort;
     }
 
